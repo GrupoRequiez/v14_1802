@@ -15,7 +15,7 @@ class StockValuationLayer(models.Model):
         string='ABC', related='product_id.classification_ABC')
     xyz = fields.Selection(
         string='XYZ', related='product_id.classification_XYZ')
-    # categ = fields.Many2one(
-    #     string='Categ', related='product_id.categ_id')
+    categ = fields.Many2one(
+        string='Categ', related='product_id.categ_id')
     sellers = fields.One2many(
         string='Seller', related='product_id.seller_ids')

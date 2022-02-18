@@ -1,0 +1,34 @@
+<odoo>
+  <data>
+    <record id="view_stock_quant_tree_inherit_tree_view" model="ir.ui.view">
+      <field name="name">view.stock.quant.tree.inherit.tree.view</field>
+      <field name="model">stock.quant</field>
+      <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+      <field name="arch" type="xml">
+        <xpath expr="//tree/field[@name='product_uom_id']" position="after">
+          <field name="brand" attrs="{'readonly': True}" optional="hide"/>
+          <field name="abc" attrs="{'readonly': True}" optional="hide"/>
+          <field name="xyz" attrs="{'readonly': True}" optional="hide"/>
+          <field name="line" attrs="{'readonly': True}" optional="hide"/>
+          <field name="sellers" attrs="{'readonly': True}" optional="hide"/>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- <record model="ir.ui.view" id="view_stock_quant_pivot_grqz_inherit">
+        <field name="name">view.stock.quant.pivot.grqz.inherit</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_pivot"/>
+        <field name="arch" type="xml">
+          <xpath expr="//pivot/field[@name='quantity']" position="after">
+            <field name="brand" type="row"/>
+            <field name="abc" type="row"/>
+            <field name="xyz" type="row"/>
+            <field name="product_min_qty" type="col"/>
+          </xpath>
+        </field>
+    </record> -->
+
+
+  </data>
+</odoo>
