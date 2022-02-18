@@ -8,7 +8,7 @@
             <field name="line" invisible="1"/>
             <field name="abc" invisible="1"/>
             <field name="xyz" invisible="1"/>
-            <!-- <field name="categ" invisible="1"/> -->
+            <field name="categ" invisible="1"/>
             <field name="sellers" invisible="1">
               <tree>
                 <field name="name"/>
@@ -35,7 +35,7 @@
                   <filter string='sellers' name="group_by_sellers" context="{'group_by': 'sellers'}"/>
               </group>
             </search>
-        </field>
+        </field> 
     </record>-->
 
 
