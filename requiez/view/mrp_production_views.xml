@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_sale_info_production_form_requiez" model="ir.ui.view">
+    <field name="name">view.sale.info.production.form.requiez</field>
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp_sale_info.mrp_production_form_view_inherit"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//field[@name='commitment_date']" position="attributes">
+        <attribute name="attrs">{'readonly': False}</attribute>
+      </xpath>
+      <xpath expr="//page[@name='miscellaneous']/group/group/field[@name='origin']" position="after">
+        <field name="order_classification" attrs="{'invisible':[('partner_id','=',False)], 'readonly':[('state','in',('done','cancel'))]}"/>
+      </xpath>
+      <xpath expr="//page[@name='miscellaneous']/group/group/field[@name='origin']" position="replace"/>
+    </field>
+  </record>
+
+  <record id="classification_order_noedit_view" model="ir.ui.view">
+    <field name="name">classification.order.noedit.view</field>
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="view_sale_info_production_form_requiez"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user') ])]"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='order_classification']" position="attributes">
+        <attribute name="readonly">1</attribute>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="classification_order_edit_view" model="ir.ui.view">
+    <field name="name">classification.order.edit.view</field>
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="classification_order_noedit_view"/>
+    <field name="groups_id" eval="[(6, 0, [ref('requiez.group_confirm_order') ])]"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='order_classification']" position="attributes">
+        <attribute name="readonly">0</attribute>
+      </xpath>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="menu_mrp_outgoing_material_view">
+    <field name="name">menu.mrp.outgoing.material.view</field>
+    <field name="model">mrp.production.material.list</field>
+    <field name="arch" type="xml">
+      <form string="Material's List">
+        <group>
+          <group>
+            <field name="type_report" class="oe_inline" widget="radio"/>
+          </group>
+        </group>
+        <field name="name" invisible="1"/>
+        <field name="csv_file" filename="name"/>
+        <footer>
+          <button name="get_outgoing_materials" string="Generate" type="object" default_focus="1" class="oe_highlight"/>
+          <button string="Cancel" class="oe_link" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_outgoing_material_view" model="ir.actions.act_window">
+      <field name="name">Material's List</field>
+      <field name="res_model">mrp.production.material.list</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="menu_mrp_outgoing_material_view"/>
+      <field name="target">new</field>
+      <field name="binding_model_id" ref="model_mrp_production"/>
+      <field name="binding_view_types">list</field>
+  </record>
+  <record id="mrp_mps_location_view" model="ir.ui.view">
+    <field name="name">mrp.mps.location.view</field>
+    <field name="model">mrp.mps.location</field>
+    <field name="arch" type="xml">
+      <form string="Location">
+        <sheet>
+          <group>
+            <group>
+              <field name="location_id"/>
+            </group>
+            <group>
+              <field name="active"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_mrp_mps_location_tree" model="ir.ui.view">
+    <field name="name">mrp.mps.location.tree</field>
+    <field name="model">mrp.mps.location</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="location_id"/>
+      </tree>
+    </field>
+  </record>
+
+</odoo>

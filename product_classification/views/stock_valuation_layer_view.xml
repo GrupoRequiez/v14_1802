@@ -1,0 +1,42 @@
+<odoo>
+  <record id="stock_valuation_layer_form_inherit_grqz" model="ir.ui.view">
+      <field name="name">stock.valuation.layer.form.inherit.grqz</field>
+      <field name="model">stock.valuation.layer</field>
+      <field name="inherit_id" ref="stock_account.stock_valuation_layer_form"/>
+      <field name="arch" type="xml">
+          <field name="stock_valuation_layer_id" position="after">
+            <field name="line" invisible="1"/>
+            <field name="abc" invisible="1"/>
+            <field name="xyz" invisible="1"/>
+            <!-- <field name="categ" invisible="1"/> -->
+            <field name="sellers" invisible="1">
+              <tree>
+                <field name="name"/>
+              </tree>
+            </field>
+          </field>
+      </field>
+    </record>
+
+    <!-- <record id="view_inventory_valuation_search_inherit_grqz" model="ir.ui.view">
+        <field name="name">Inventory Valuation</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="arch" type="xml">
+            <search string="Inventory Valuation">
+              <field name="line"/>
+              <field name="abc"/>
+              <field name="xyz"/>
+              <field name="sellers"/>
+              <separator/>
+              <group expand='0' string='Group by...'>
+                  <filter string='Its line' name="group_by_line" context="{'group_by': 'line'}"/>
+                  <filter string='ABC' name="group_by_abc" context="{'group_by': 'abc'}"/>
+                  <filter string='XYZ' name="group_by_xyz" context="{'group_by': 'xyz'}"/>
+                  <filter string='sellers' name="group_by_sellers" context="{'group_by': 'sellers'}"/>
+              </group>
+            </search>
+        </field>
+    </record>-->
+
+
+  </odoo>

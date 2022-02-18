@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_material_list">
+    <t t-call="web.html_container">
+      <t t-call="requiez.report_material_list_document" t-lang="user.partner_id.lang"/>
+    </t>
+  </template>
+  <!-- Translatable template -->
+  <template id="report_material_list_document">
+    <t t-set="docs" t-value="docs.with_context({'lang':user.partner_id.lang})"/>
+    <t t-call="web.external_layout">
+      <!-- <div> -->
+        <h3>Material's List</h3>
+        Date of Generation: <span t-esc="data['date']"/>
+      <!-- </div> -->
+      <div class="page">
+        <div class="row mt32 mb32">
+        <table style="width: 100%;" class="table table-condensed">
+          <tbody>
+            <t t-foreach="data['ids']" t-as="op">
+              <tr align="center" style="font-size:12px;font-family:impact;background-color:gray;">
+                <th style="border:solid 1px;">
+                  <strong>OP</strong>
+                </th>
+                <th style="border:solid 1px;">
+                  <strong>PRODUCT</strong>
+                </th>
+                <th style="border:solid 1px;" width="400">
+                  <strong>DESCRIPTION</strong>
+                </th>
+                <th style="border:solid 1px;">
+                  <strong>QUANTITY</strong>
+                </th>
+                <th style="border:solid 1px;">
+                  <strong>OBS / LOCATIONS</strong>
+                </th>
+              </tr>
+              <t t-foreach="data['moves'][op]" t-as="line">
+                <t t-if="line == '0details'">
+                  <!-- <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', data['moves'][op][line]['url'], 100, 100)"/> -->
+                  <tr style="font-size:8px;font-family:verdana;background-color:powderblue;">
+                    <td align="center" style="border:solid 1px;" >
+                      <strong><span t-esc="op"/></strong>
+                    </td>
+                    <td align="center" style="border:solid 1px;">
+                      <strong><span t-esc="data['moves'][op][line]['mrp_product']"/></strong>
+                    </td>
+                    <td align="center" style="border:solid 1px;">
+                      <strong><span t-esc="data['moves'][op][line]['mrp_product_name']"/></strong>
+                    </td>
+                    <td align="center" style="border:solid 1px;">
+                      <strong><span t-esc="data['moves'][op][line]['mrp_qty']"/></strong>
+                    </td>
+                    <td align="center" style="border:solid 1px;">
+                      <strong><span t-esc="data['moves'][op][line]['mrp_obs']"/></strong>
+                    </td>
+                  </tr>
+                </t>
+                <t t-else="">
+                  <tr style="font-size:8px;background-color:white;">
+                    <td align="center" style="border:solid 1px;">
+                      <h6></h6>
+                    </td>
+                    <td align="center" style="border:solid 1px;">
+                      <span t-esc="data['moves'][op][line]['move_product']"/>
+                    </td>
+                    <td align="center" style="border:solid 1px;">
+                      <span t-esc="data['moves'][op][line]['move_product_name']"/>
+                    </td>
+                    <td align="center" style="border:solid 1px;">
+                      <span t-esc="data['moves'][op][line]['move_qty']"/>
+                    </td>
+                    <td align="center" style="border:solid 1px;">
+                      <span t-esc="data['moves'][op][line]['locations']"/>
+                    </td>
+                  </tr>
+                </t>
+              </t>
+              <tr>
+                <td colspan="5"/>
+              </tr>
+            </t>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>
